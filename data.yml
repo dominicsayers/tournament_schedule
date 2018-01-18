@@ -9,22 +9,22 @@ times:
 clubs:
   club 1:
     -
-      name: club 1 player 1
+      name: c1p1
       group: A
     -
-      name: club 1 player 2
+      name: c1p2
       group: A
     -
-      name: club 1 player 3
+      name: c1p3
       group: A
   club 2:
     -
-      name: club 2 player 1
+      name: c2p1
       group: A
   club 3:
     -
-      name: club 3 player 1
+      name: c3p1
       group: A
     -
-      name: club 3 player 2
+      name: c3p2
       group: A

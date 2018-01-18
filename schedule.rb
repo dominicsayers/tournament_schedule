@@ -36,27 +36,28 @@ group_names.each do |group_name|
   favourite_permutation = {}
   favourite_permutation_score = 0
 
-  matchups.permutation.each do |permutation|
+  matchups.permutation.each do |variation|
     tournament = {}
     time_index = 0
     location_index = 0
     location = locations[location_index]
 
     # build tournament
-    permutation.each do |matchup|
+    variation.each do |matchup|
       tournament[location] ||= {}
 
-      time = times[time_index].to_s
+      time = Time.at(times[time_index]).strftime('%H:%M')
       tournament[location][time] = matchup
 
       time_index += 1
-      next unless time_index > time_slots
+      next unless time_index >= time_slots
 
       time_index = 0
       location_index += 1
       location = locations[location_index]
     end
 
+    puts variation.inspect
     puts tournament
 
     # score tournament
@@ -64,28 +65,27 @@ group_names.each do |group_name|
     valid = true
 
     times.each do |time_value|
-      time = time_value.to_s
+      time = Time.at(time_value).strftime('%H:%M')
       players_at_time = []
       locations_at_time = 0
 
       locations.each do |tournament_location|
-        matchups = tournament[tournament_location]
-        next unless matchups && !matchups.empty?
+        location_matchups = tournament[tournament_location]
+        puts "time: #{time}, location: #{tournament_location}, location_matchups: #{location_matchups}"
+        next unless location_matchups && !location_matchups.empty?
 
         locations_at_time += 1
 
         # Ensure player isn't in two places at once
-        matchup = matchups[time]
+        matchup = location_matchups[time]
 
         unless (players_at_time & matchup).empty?
           puts "#{time} clash for #{players_at_time} and #{matchup}"
-          break valid = false
+          valid = false
         end
 
         players_at_time |= matchup
       end
-
-      break unless valid
 
       locations_at_time = time.length
       max_locations = locations_at_time if locations_at_time > max_locations
