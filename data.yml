@@ -1,0 +1,30 @@
+---
+locations:
+  - court 1
+  - court 2
+times:
+  - 12:00
+  - 13:00
+  - 14:00
+clubs:
+  club 1:
+    -
+      name: club 1 player 1
+      group: A
+    -
+      name: club 1 player 2
+      group: A
+    -
+      name: club 1 player 3
+      group: A
+  club 2:
+    -
+      name: club 2 player 1
+      group: A
+  club 3:
+    -
+      name: club 3 player 1
+      group: A
+    -
+      name: club 3 player 2
+      group: A
