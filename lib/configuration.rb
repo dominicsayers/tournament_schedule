@@ -3,6 +3,10 @@ class Configuration
     @times ||= data['times']
   end
 
+  def time_strings
+    @time_strings ||= times.map { |time| Time.at(time).strftime('%H:%M') }
+  end
+
   def locations
     @locations ||= data['locations']
   end
@@ -17,6 +21,25 @@ class Configuration
 
   def time_slots
     @time_slots ||= times.length
+  end
+
+  def groups
+    @groups ||= begin
+      clubs.each_with_object({}) do |(k, v), a|
+        v.each do |e|
+          group = e['group']
+          a[group] ||= {}
+          a[group][e['name']] = k
+        end
+      end
+    end
+  end
+
+  def group_names
+    @group_names ||= groups.keys.shuffle
+  end
+
+  def time_string(time)
   end
 
   private

@@ -13,18 +13,32 @@ clubs:
       group: A
     -
       name: c1p2
-      group: A
+      group: B
     -
       name: c1p3
       group: A
   club 2:
     -
       name: c2p1
-      group: A
+      group: B
   club 3:
     -
       name: c3p1
       group: A
     -
       name: c3p2
+      group: B
+  club 4:
+    -
+      name: c4p1
       group: A
+    -
+      name: c4p2
+      group: B
+  club 5:
+    -
+      name: c5p1
+      group: A
+    -
+      name: c5p2
+      group: B

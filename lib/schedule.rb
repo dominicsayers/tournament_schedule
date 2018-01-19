@@ -1,6 +1,7 @@
 class Schedule
   def build
     @permutation.each { |matchup| add(matchup) }
+    # puts @schedule.inspect # debug
     @schedule
   end
 
@@ -41,7 +42,7 @@ class Schedule
   end
 
   def time
-    Time.at(data.times[time_index]).strftime('%H:%M')
+    data.time_strings[time_index]
   end
 
   def location_index
