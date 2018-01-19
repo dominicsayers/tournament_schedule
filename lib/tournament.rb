@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require_relative 'group'
+require_relative 'configuration'
 
 class Tournament
   def schedule
@@ -14,32 +16,12 @@ class Tournament
   end
 
   def data
-    @data ||= YAML.load_file(@filename)
-  end
-
-  def times
-    @times ||= data['times']
-  end
-
-  def time_slots
-    @time_slots ||= times.length
-  end
-
-  def locations
-    @locations ||= data['locations']
-  end
-
-  def locations_count
-    @locations_count ||= locations.length
-  end
-
-  def clubs
-    @clubs ||= data['clubs']
+    @data ||= Configuration.new(filename: @filename)
   end
 
   def groups
     @groups ||= begin
-      clubs.each_with_object({}) do |(k, v), a|
+      data.clubs.each_with_object({}) do |(k, v), a|
         v.each do |e|
           group = e['group']
           a[group] ||= {}
@@ -54,6 +36,6 @@ class Tournament
   end
 
   def schedule_group(group_name)
-    Group.new(groups[group_name]).schedule
+    Group.new(data, groups[group_name]).schedule
   end
-
+end

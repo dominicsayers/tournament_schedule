@@ -1,3 +1,5 @@
+require_relative 'permutation'
+
 class Group
   def schedule
     matchups.permutation.each { |permutation| assess(permutation) }
@@ -6,12 +8,13 @@ class Group
 
   private
 
-  def initialize(entrants)
+  def initialize(data, entrants)
+    @data = data
     @entrants = entrants
   end
 
   def entrant_names
-    @entrant_names ||= entrants.keys
+    @entrant_names ||= @entrants.keys
   end
 
   def matchups
@@ -27,7 +30,7 @@ class Group
   end
 
   def assess(permutation)
-    score = Permutation.new(permutation).assess
+    score = Permutation.new(@data, permutation).assess
 
     if score > favourite_permutation_score
       @favourite_permutation = permutation

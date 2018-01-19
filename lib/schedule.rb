@@ -1,11 +1,15 @@
 class Schedule
   def build
-    permutation.each { |matchup| add(matchup) }
+    @permutation.each { |matchup| add(matchup) }
+    @schedule
   end
 
   private
 
-  def initialize(permutation)
+  attr_reader :data
+
+  def initialize(data, permutation)
+    @data = data
     @permutation = permutation
   end
 
@@ -14,20 +18,20 @@ class Schedule
   end
 
   def add(matchup)
-    register(matchup, time)
+    register(matchup)
     next_slot
   end
 
   def next_slot
     @time_index += 1
-    next unless time_index >= time_slots
+    return unless time_index >= data.time_slots
 
     @time_index = 0
     @location_index += 1
     @location = nil
   end
 
-  def register(matchup, time)
+  def register(matchup)
     schedule[location] ||= {}
     schedule[location][time] = matchup
   end
@@ -37,7 +41,7 @@ class Schedule
   end
 
   def time
-    @time ||= Time.at(times[time_index]).strftime('%H:%M')
+    Time.at(data.times[time_index]).strftime('%H:%M')
   end
 
   def location_index
@@ -45,5 +49,9 @@ class Schedule
   end
 
   def location
-    @location ||= locations[location_index]
+    @location ||= begin
+      extra = location_index - data.locations_count
+      extra < 0 ? data.locations[location_index] : "Extra location #{extra + 1}"
+    end
   end
+end
