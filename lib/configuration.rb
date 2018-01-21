@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Configuration
   def times
     @times ||= data['times']

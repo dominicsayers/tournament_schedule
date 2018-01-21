@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'exception'
 require_relative 'metrics'
 
@@ -9,7 +11,7 @@ class Schedule
   end
 
   def to_s
-    "#{to_s_header}\n#{to_s_body}\n\n#{metrics.to_s}"
+    "#{to_s_header}\n#{to_s_body}\n\n#{metrics}"
   end
 
   def schedule
@@ -30,7 +32,7 @@ class Schedule
   end
 
   def register(matchup)
-    time_list = time_lists.find { |time_string, players_at_time| (players_at_time & matchup).empty? }
+    time_list = time_lists.find { |_time_string, players_at_time| (players_at_time & matchup).empty? }
     raise InvalidPermutation unless time_list
 
     time_string = time_list[0]
@@ -41,7 +43,7 @@ class Schedule
   end
 
   def time_lists
-    @time_lists ||= data.time_strings.map { |time_string| [time_string, []]}.to_h
+    @time_lists ||= data.time_strings.map { |time_string| [time_string, []] }.to_h
   end
 
   def to_s_header
@@ -50,7 +52,7 @@ class Schedule
 
   def to_s_body
     schedule.map do |time_string, matchups|
-      "#{time_string}\t#{matchups.map { |m| m.join(" v ") }.join("\t")}"
+      "#{time_string}\t#{matchups.map { |m| m.join(' v ') }.join("\t")}"
     end.join("\n")
   end
 end

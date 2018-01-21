@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'schedule'
 
 class Group
@@ -10,7 +12,7 @@ class Group
   def to_s
     <<~GROUP
       Group #{@group_name}
-      #{@entrants.map { |name, club| "  " + name + " (" + club + ")" }.join("\n")}
+      #{@entrants.map { |name, club| '  ' + name + ' (' + club + ')' }.join("\n")}
     GROUP
   end
 
@@ -42,7 +44,7 @@ class Group
   end
 
   def permutation_count_pretty
-    @permutation_count_pretty ||= permutation_count.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse
+    @permutation_count_pretty ||= permutation_count.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse
   end
 
   def assess(permutation)
@@ -59,9 +61,9 @@ class Group
     @index += 1
     percent_complete = 100 * @index / permutation_count
 
-    if percent_complete > @percent_complete
-      @percent_complete = percent_complete
-      print "#{percent_complete}% "
-    end
+    return unless percent_complete > @percent_complete
+
+    @percent_complete = percent_complete
+    print "#{percent_complete}% "
   end
 end

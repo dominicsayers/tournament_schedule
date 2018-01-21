@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Metrics
   # We try to minimise all criteria
   CRITERIA = {
@@ -6,7 +8,7 @@ class Metrics
     longest_wait: 'longest wait between games',
     consecutive_matchups: 'most consecutive games for an entrant',
     same_club_matchups: 'games between members of same club'
-  }
+  }.freeze
 
   def better_than?(other_schedule)
     return false unless valid?
@@ -14,7 +16,7 @@ class Metrics
 
     other_metrics = other_schedule.metrics
 
-    CRITERIA.keys.each do |criterion|
+    CRITERIA.each_key do |criterion|
       this_metric = send(criterion)
       other_metric = other_metrics.send(criterion)
 
@@ -70,7 +72,7 @@ class Metrics
   def games_per_entrant
     games_per_entrant = {}
 
-    schedule.each do |time_string, matchups|
+    schedule.each_value do |matchups|
       matchups.each do |matchup|
         matchup.each do |entrant|
           games_per_entrant[entrant] ||= 0
