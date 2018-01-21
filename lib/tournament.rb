@@ -6,7 +6,8 @@ require_relative 'configuration'
 
 class Tournament
   def schedule
-    data.group_names.each { |group_name| puts "\n#{Group.new(data, group_name).schedule.inspect}" }
+    puts data
+    data.group_names.each { |group_name|Group.new(data, group_name).schedule }
     nil
   end
 

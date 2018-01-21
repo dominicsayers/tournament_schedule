@@ -1,0 +1,2 @@
+class InvalidPermutation < RuntimeError
+end

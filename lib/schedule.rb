@@ -1,8 +1,19 @@
+require_relative 'exception'
+require_relative 'metrics'
+
 class Schedule
-  def build
-    @permutation.each { |matchup| add(matchup) }
-    # puts @schedule.inspect # debug
-    @schedule
+  attr_reader :metrics
+
+  def better_than?(other_schedule)
+    metrics.better_than? other_schedule
+  end
+
+  def to_s
+    "#{to_s_header}\n#{to_s_body}\n\n#{metrics.to_s}"
+  end
+
+  def schedule
+    @schedule ||= {}
   end
 
   private
@@ -11,48 +22,35 @@ class Schedule
 
   def initialize(data, permutation)
     @data = data
-    @permutation = permutation
-  end
-
-  def schedule
-    @schedule ||= {}
-  end
-
-  def add(matchup)
-    register(matchup)
-    next_slot
-  end
-
-  def next_slot
-    @time_index += 1
-    return unless time_index >= data.time_slots
-
-    @time_index = 0
-    @location_index += 1
-    @location = nil
+    permutation.each { |matchup| register(matchup) }
+  rescue InvalidPermutation
+    @schedule = nil
+  ensure
+    @metrics = Metrics.new(schedule)
   end
 
   def register(matchup)
-    schedule[location] ||= {}
-    schedule[location][time] = matchup
+    time_list = time_lists.find { |time_string, players_at_time| (players_at_time & matchup).empty? }
+    raise InvalidPermutation unless time_list
+
+    time_string = time_list[0]
+    time_lists[time_string] |= matchup
+
+    schedule[time_string] ||= []
+    schedule[time_string] << matchup
   end
 
-  def time_index
-    @time_index ||= 0
+  def time_lists
+    @time_lists ||= data.time_strings.map { |time_string| [time_string, []]}.to_h
   end
 
-  def time
-    data.time_strings[time_index]
+  def to_s_header
+    "\t" + (1..metrics.locations_required).map { |i| data.locations[i - 1] || 'undefined' }.join("\t")
   end
 
-  def location_index
-    @location_index ||= 0
-  end
-
-  def location
-    @location ||= begin
-      extra = location_index - data.locations_count
-      extra < 0 ? data.locations[location_index] : "Extra location #{extra + 1}"
-    end
+  def to_s_body
+    schedule.map do |time_string, matchups|
+      "#{time_string}\t#{matchups.map { |m| m.join(" v ") }.join("\t")}"
+    end.join("\n")
   end
 end
