@@ -46,7 +46,26 @@ class Metrics
   end
 
   def longest_wait
-    @longest_wait ||= 0
+    @longest_wait ||= begin
+      longest = 0
+      time_slot = 0
+      entrant_latest_time_slot = {}
+
+      schedule.each_value do |matchups|
+        time_slot += 1
+
+        matchups.each do |matchup|
+          matchup.each do |entrant|
+            latest_time_slot = entrant_latest_time_slot[entrant]
+            wait = time_slot - (latest_time_slot || 0)
+            longest = wait if wait > longest
+            entrant_latest_time_slot[entrant] = time_slot
+          end
+        end
+      end
+
+      longest
+    end
   end
 
   def consecutive_matchups

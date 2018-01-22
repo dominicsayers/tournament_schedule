@@ -9,10 +9,10 @@ times:
   - 11:20
 clubs:
   club 1:
-    - c1p1
-    - c1p2
-    - c1p3
+    - Club 1 Player 1
+    - Club 1 Player 2
+    - Club 1 Player 3
   club 2:
-    - c2p1
+    - Club 2 Player 1
   club 3:
-    - c3p1
+    - Club 3 Player 1

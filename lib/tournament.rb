@@ -7,7 +7,19 @@ require_relative 'configuration'
 class Tournament
   def schedule
     puts data
-    data.group_names.each { |group_name| Group.new(data, group_name).schedule }
+    schedules = data.group_names.map { |group_name| [group_name, Group.new(data, group_name).schedule] }.to_h
+
+    schedules.each do |group_name, schedule|
+      puts <<~SCHEDULE
+
+        Group: #{group_name}
+
+        #{schedule}
+
+        #{'-' * 80}
+      SCHEDULE
+    end
+
     nil
   end
 

@@ -19,7 +19,7 @@ class Group
   private
 
   def initialize(data, group_name)
-    puts "Group #{group_name}" # debug
+    puts "\nGroup #{group_name}" # debug
 
     @data = data
     @group_name = group_name
