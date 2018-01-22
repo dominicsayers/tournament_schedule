@@ -1,0 +1,123 @@
+---
+locations:
+  - U71
+  - U72
+  - U73
+times:
+  - 10:00
+  - 10:20
+  - 10:40
+  - 11:00
+  - 11:20
+  - 11:40
+  - 12:00
+  - 12:20
+  - 12:40
+clubs:
+  Blackheath FC:
+    -
+      name: Blackheath FC 1
+      group: U7A
+    -
+      name: Blackheath FC 2
+      group: U7B
+    -
+      name: Blackheath FC 3
+      group: U7C
+    -
+      name: Blackheath FC 4
+      group: U7D
+  Dartfordians RFC:
+    -
+      name: Dartfordians RFC 1
+      group: U7E
+    -
+      name: Dartfordians RFC 2
+      group: U7F
+    -
+      name: Dartfordians RFC 3
+      group: U7A
+    -
+      name: Dartfordians RFC 4
+      group: U7B
+  Hampstead RFC:
+    -
+      name: Hampstead RFC 1
+      group: U7C
+    -
+      name: Hampstead RFC 2
+      group: U7F
+  Medway RFC:
+    -
+      name: Medway RFC
+      group: U7E
+  Old Colfeians RFC:
+    -
+      name: Old Colfeians RFC 1
+      group: U7A
+    -
+      name: Old Colfeians RFC 2
+      group: U7B
+    -
+      name: Old Colfeians RFC 3
+      group: U7C
+    -
+      name: Old Colfeians RFC 4
+      group: U7D
+  Old Elthamians RFC:
+    -
+      name: Old Elthamians RFC 1
+      group: U7A
+    -
+      name: Old Elthamians RFC 2
+      group: U7B
+    -
+      name: Old Elthamians RFC 3
+      group: U7C
+    -
+      name: Old Elthamians RFC 4
+      group: U7D
+    -
+      name: Old Elthamians RFC 5
+      group: U7E
+  Sevenoaks RFC:
+    -
+      name: Sevenoaks RFC 1
+      group: U7F
+    -
+      name: Sevenoaks RFC 2
+      group: U7D
+  Sidcup RFC:
+    -
+      name: Sidcup RFC 1
+      group: U7E
+    -
+      name: Sidcup RFC 2
+      group: U7F
+  Tonbridge Juddians RFC:
+    -
+      name: Tonbridge Juddians RFC 1
+      group: U7A
+    -
+      name: Tonbridge Juddians RFC 2
+      group: U7B
+    -
+      name: Tonbridge Juddians RFC 3
+      group: U7C
+  Tunbridge Wells RFC:
+    -
+      name: Tunbridge Wells RFC 1
+      group: U7D
+    -
+      name: Tunbridge Wells RFC 2
+      group: U7E
+    -
+      name: Tunbridge Wells RFC 3
+      group: U7F
+  Westcombe Park RFC:
+    -
+      name: Westcombe Park RFC 1
+      group: U7E
+    -
+      name: Westcombe Park RFC 2
+      group: U7F
