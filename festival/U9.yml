@@ -15,6 +15,7 @@ groups:
     locations:
       - 1
       - 2
+      - 3
     times:
       - 10:15
       - 10:45
@@ -23,36 +24,28 @@ groups:
       - 12:15
   C:
     locations:
-      - 3
       - 4
+      - 5
+      - 6
     times:
-      - 10:15
-      - 10:45
-      - 11:15
-      - 11:45
-      - 12:15
+      - 10:00
+      - 10:30
+      - 11:00
+      - 11:30
+      - 12:00
   D:
     locations:
+      - 4
       - 5
       - 6
     times:
-      - 10:00
-      - 10:30
-      - 11:00
-      - 11:30
-      - 12:00
+      - 10:15
+      - 10:45
+      - 11:15
+      - 11:45
+      - 12:15
   E:
     locations:
-      - 5
-      - 6
-    times:
-      - 10:15
-      - 10:45
-      - 11:15
-      - 11:45
-      - 12:15
-  F:
-    locations:
       - 7
       - 8
     times:
@@ -61,17 +54,14 @@ groups:
       - 11:00
       - 11:30
       - 12:00
-  G:
-    locations:
-      - 7
-      - 8
-    times:
-      - 10:15
-      - 10:45
-      - 11:15
-      - 11:45
-      - 12:15
 clubs:
+  Bishops Stortford RFC:
+    -
+      name: Bishops Stortford 1
+      group: A
+    -
+      name: Bishops Stortford 2
+      group: B
   Blackheath FC:
     -
       name: Blackheath 1
@@ -85,38 +75,23 @@ clubs:
     -
       name: Blackheath 4
       group: D
-    -
-      name: Blackheath 5
-      group: E
-    -
-      name: Blackheath 6
-      group: F
-    -
-      name: Blackheath 7
-      group: G
-    -
-      name: Blackheath 8
-      group: A
   Dartfordians RFC:
     -
       name: Dartfordians 1
-      group: C
+      group: D
     -
       name: Dartfordians 2
       group: E
     -
       name: Dartfordians 3
-      group: G
-    -
-      name: Dartfordians 4
-      group: B
+      group: C
   Hampstead RFC:
     -
       name: Hampstead 1
       group: D
     -
       name: Hampstead 2
-      group: F
+      group: E
   Medway RFC:
     -
       name: Medway RFC
@@ -124,36 +99,30 @@ clubs:
   Old Colfeians RFC:
     -
       name: Old Colfeians 1
-      group: C
+      group: D
     -
       name: Old Colfeians 2
       group: E
     -
       name: Old Colfeians 3
-      group: G
+      group: B
     -
       name: Old Colfeians 4
-      group: B
+      group: A
   Old Elthamians RFC:
     -
       name: Old Elthamians 1
-      group: D
+      group: B
     -
       name: Old Elthamians 2
-      group: F
-    -
-      name: Old Elthamians 3
-      group: A
-    -
-      name: Old Elthamians 4
       group: C
     -
-      name: Old Elthamians 5
-      group: E
+      name: Old Elthamians 3
+      group: D
   Sevenoaks RFC:
     -
       name: Sevenoaks 1
-      group: G
+      group: E
     -
       name: Sevenoaks 2
       group: B
@@ -163,7 +132,7 @@ clubs:
       group: D
     -
       name: Sidcup 2
-      group: F
+      group: C
   Tonbridge Juddians RFC:
     -
       name: Tonbridge Juddians 1
@@ -171,23 +140,17 @@ clubs:
     -
       name: Tonbridge Juddians 2
       group: C
-    -
-      name: Tonbridge Juddians 3
-      group: E
   Tunbridge Wells RFC:
     -
       name: Tunbridge Wells 1
-      group: G
+      group: E
     -
       name: Tunbridge Wells 2
       group: B
-    -
-      name: Tunbridge Wells 3
-      group: D
   Westcombe Park RFC:
     -
       name: Westcombe Park 1
-      group: F
+      group: C
     -
       name: Westcombe Park 2
       group: A
