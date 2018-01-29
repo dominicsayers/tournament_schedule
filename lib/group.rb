@@ -98,7 +98,7 @@ class Group
   end
 
   def progress_denominator_symbol
-    @progress_denominator_symbol ||= progress_denominator == 1000 ? '‰' : '%'
+    @progress_denominator_symbol ||= progress_denominator == 1_000_000 ? '‰' : '%'
   end
 
   def show_progress

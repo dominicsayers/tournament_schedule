@@ -31,7 +31,7 @@ class Tournament
 
   def initialize(filename:)
     @data ||= Configuration.new(filename: filename)
-    @tournament_name = Pathname.new(filename).basename
+    @tournament_name = Pathname.new(filename).basename('.*').to_s
     @schedules = {}
   end
 
@@ -50,7 +50,7 @@ class Tournament
 
   def to_csv
     @schedules.keys.sort.each do |group_name|
-      filepath = Pathname.new File.join("tmp", "schedules", @tournament_name, "#{group_name}.csv")
+      filepath = Pathname.new File.join("schedules", @tournament_name, "#{group_name}.csv")
       FileUtils.mkdir_p filepath.dirname
       CSV.open(filepath, "wb") { |csv| @schedules[group_name].to_csv(csv) }
     end

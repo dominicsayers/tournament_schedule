@@ -38,14 +38,26 @@ class Schedule
   end
 
   def register(matchup)
-    time_list = time_lists.find { |_, players_at_time| (players_at_time & matchup).empty? }
-    raise InvalidPermutation unless time_list
+    available_times = time_lists.select { |_, players_at_time| (players_at_time & matchup).empty? }
+    raise InvalidPermutation if available_times.empty?
 
-    time_string = time_list[0]
-    time_lists[time_string] |= matchup
+    available_times.each do |time_list|
+      time_string = time_list[0]
+      schedule[time_string] ||= []
 
-    schedule[time_string] ||= []
-    schedule[time_string] << matchup
+      next unless schedule[time_string].length < location_count
+
+      time_lists[time_string] |= matchup
+      schedule[time_string] << matchup
+
+      return
+    end
+
+    raise InvalidPermutation # No locations left
+  end
+
+  def location_count
+    @location_count ||= group.locations.length
   end
 
   def time_lists
