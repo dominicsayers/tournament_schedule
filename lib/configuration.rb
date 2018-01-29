@@ -1,60 +1,41 @@
 # frozen_string_literal: true
 
 class Configuration
-  def times
-    @times ||= data['times']
-  end
-
-  def time_strings
-    @time_strings ||= times.map { |time| time_string(time) }
-  end
-
-  def locations
-    @locations ||= data['locations'] || []
-  end
-
   def clubs
     @clubs ||= data['clubs']
-  end
-
-  def locations_count
-    @locations_count ||= locations.length
-  end
-
-  def time_slots
-    @time_slots ||= times.length
   end
 
   def groups
     @groups ||= begin
       clubs.each_with_object({}) do |(club, entrants), a|
         entrants.each do |e|
-          group, name = e.is_a?(String) ? ['default', e] : [e['group'], e['name']]
+          group_name, entrant_name = e.is_a?(String) ? ['default', e] : [e['group'], e['name']]
 
-          # puts "loading #{name} from #{club} into #{group} (#{e})"
+          a[group_name] ||= {
+            entrants: {},
+            locations: group_data(group_name)['locations'],
+            times: group_data(group_name)['times']
+          }
 
-          a[group] ||= {}
-          a[group][name] = club
+          a[group_name][:entrants][entrant_name] = club
         end
       end
     end
   end
 
   def group_names
-    @group_names ||= groups.keys.shuffle
+    @group_names ||= groups.keys
   end
 
-  def time_string(time)
-    Time.at(time).strftime('%H:%M')
+  def group_data(group_name)
+    data.dig('groups', group_name) || {}
   end
 
   def to_s
     <<~CONFIGURATION
-      Locations: #{locations_count.zero? ? 'none defined' : locations.join(', ')}
-      Times: #{time_strings.join(', ')}
       Groups:
 
-      #{group_names.map { |group_name| Group.new(self, group_name) }.join("\n")}
+      #{group_names.sort.map { |group_name| Group.new(groups[group_name], group_name) }.join("\n")}
     CONFIGURATION
   end
 

@@ -6,39 +6,41 @@ times:
   - 12:00
   - 13:00
   - 14:00
+  - 15:00
+  - 16:00
 clubs:
   club 1:
     -
-      name: c1p1
+      name: Club 1 Player 1
       group: A
     -
-      name: c1p2
+      name: Club 1 Player 2
       group: B
     -
-      name: c1p3
+      name: Club 1 Player 3
       group: A
   club 2:
     -
-      name: c2p1
+      name: Club 2 Player 1
       group: B
   club 3:
     -
-      name: c3p1
+      name: Club 3 Player 1
       group: A
     -
-      name: c3p2
+      name: Club 3 Player 2
       group: B
   club 4:
     -
-      name: c4p1
+      name: Club 4 Player 1
       group: A
     -
-      name: c4p2
+      name: Club 4 Player 2
       group: B
   club 5:
     -
-      name: c5p1
+      name: Club 5 Player 1
       group: A
     -
-      name: c5p2
+      name: Club 5 Player 2
       group: B
