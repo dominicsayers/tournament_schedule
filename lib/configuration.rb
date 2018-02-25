@@ -2,7 +2,10 @@
 
 class Configuration
   def clubs
-    @clubs ||= data['clubs']
+    @clubs ||= begin
+      club_data = data['clubs']
+      club_data.is_a?(Hash) ? club_data : auto_generate_clubs(club_data)
+    end
   end
 
   def groups
@@ -45,5 +48,15 @@ class Configuration
 
   def initialize(filename:)
     @data = YAML.load_file(filename)
+  end
+
+  GROUPS = ('A'..'Z').to_a
+
+  def auto_generate_clubs(count)
+    group_size = count.modulo(6).zero? ? 6 : 5
+    group_count = count / group_size
+    data = { 'Auto' => [] }
+    Array.new(count) { |index| data["Auto"] << { 'name' => index.to_s, 'group' => GROUPS[index.modulo(group_count)] } }
+    data
   end
 end
