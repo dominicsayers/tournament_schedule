@@ -53,8 +53,29 @@ class Configuration
   GROUPS = ('A'..'Z').to_a
 
   def auto_generate_clubs(count)
-    group_size = count.modulo(6).zero? && !count == 30 ? 6 : 5
-    group_count = count / group_size
+    group_size, group_count = begin
+      if count.modulo(10).zero?
+        [5, count / 5]
+      elsif count > 36
+        [6, 7]
+      elsif count >= 30
+        [5, 6]
+      elsif count >= 24
+        [4, 6]
+      elsif count > 20
+        [4, 5]
+      elsif count >= 16
+        [4, 4]
+      elsif count >= 12
+        [4, 3]
+      else
+        [6, 2]
+      end
+    end
+
+    # s = count.modulo(6).zero? ? 6 : 5
+    # [count / s, s]
+
     data = { 'Auto' => [] }
     Array.new(count) { |index| data["Auto"] << { 'name' => index.to_s, 'group' => GROUPS[index.modulo(group_count)] } }
     data
