@@ -49,10 +49,14 @@ class Tournament
   end
 
   def to_csv
+    filepath = Pathname.new File.join("schedules", "#{@tournament_name}.csv")
+    FileUtils.mkdir_p filepath.dirname
+    FileUtils.rm_f(filepath)
+
     @schedules.keys.sort.each do |group_name|
-      filepath = Pathname.new File.join("schedules", @tournament_name, "#{group_name}.csv")
-      FileUtils.mkdir_p filepath.dirname
-      CSV.open(filepath, "wb") { |csv| @schedules[group_name].to_csv(csv) }
+      File.open(filepath, 'a+') { |file| file.puts "Group #{group_name}" }
+      CSV.open(filepath, "a+") { |csv| @schedules[group_name].to_csv(csv) }
+      File.open(filepath, 'a+') { |file| file.puts "" }
     end
   end
 end
