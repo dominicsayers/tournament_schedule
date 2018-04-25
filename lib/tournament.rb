@@ -49,7 +49,7 @@ class Tournament
   end
 
   def to_csv
-    filepath = Pathname.new File.join("schedules", "#{@tournament_name}.csv")
+    filepath = Pathname.new File.join("schedules", "csv", "#{@tournament_name}.csv")
     FileUtils.mkdir_p filepath.dirname
     FileUtils.rm_f(filepath)
 
