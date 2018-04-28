@@ -64,9 +64,7 @@ class Configuration
         5
       elsif count > 18
         4
-      elsif count == 16
-        4
-      elsif count >= 12
+      elsif count > 11
         3
       else
         2
